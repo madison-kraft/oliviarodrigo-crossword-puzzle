@@ -1,0 +1,87 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red27\green27\blue27;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c14118\c14118\c14118;\cssrgb\c100000\c100000\c100000;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs30 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 const crosswordData = [\
+\'a0 \'a0 \{ clue: "1. First word", answer: "FIRST", row: 0, col: 0, direction: "across" \},\
+\'a0 \'a0 \{ clue: "2. Second word", answer: "SECOND", row: 1, col: 0, direction: "across" \},\
+\'a0 \'a0 \{ clue: "1. Third word", answer: "THIRD", row: 0, col: 0, direction: "down" \},\
+\'a0 \'a0 \{ clue: "2. Fourth word", answer: "FOURTH", row: 0, col: 1, direction: "down" \},\
+\'a0 \'a0 // Add more clues and answers here\
+];\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 function createCrossword() \{\
+\'a0 \'a0 const crosswordContainer = document.getElementById("crossword");\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \'a0 \'a0 for (let i = 0; i < 5; i++) \{\
+\'a0 \'a0 \'a0 \'a0 for (let j = 0; j < 5; j++) \{\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 const input = document.createElement("input");\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 input.setAttribute("type", "text");\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 input.setAttribute("maxlength", "1");\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 input.dataset.row = i;\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 input.dataset.col = j;\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 crosswordContainer.appendChild(input);\
+\'a0 \'a0 \'a0 \'a0 \}\
+\'a0 \'a0 \}\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \'a0 \'a0 for (const \{ row, col, answer, direction \} of crosswordData) \{\
+\'a0 \'a0 \'a0 \'a0 for (let k = 0; k < answer.length; k++) \{\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 const input = document.querySelector(`input[data-row='$\{row\}'][data-col='$\{col\}']`);\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 if (direction === "across") \{\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 col++;\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \} else if (direction === "down") \{\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 row++;\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \}\
+\'a0 \'a0 \'a0 \'a0 \}\
+\'a0 \'a0 \}\
+\}\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 function checkAnswers() \{\
+\'a0 \'a0 for (const \{ row, col, answer, direction \} of crosswordData) \{\
+\'a0 \'a0 \'a0 \'a0 let userAnswer = "";\
+\'a0 \'a0 \'a0 \'a0 let currentRow = row;\
+\'a0 \'a0 \'a0 \'a0 let currentCol = col;\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \'a0 \'a0 \'a0 \'a0 for (let k = 0; k < answer.length; k++) \{\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 const input = document.querySelector(`input[data-row='$\{currentRow\}'][data-col='$\{currentCol\}']`);\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 userAnswer += input.value.toUpperCase();\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 if (direction === "across") \{\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 currentCol++;\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \} else if (direction === "down") \{\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 currentRow++;\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \}\
+\'a0 \'a0 \'a0 \'a0 \}\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \'a0 \'a0 \'a0 \'a0 if (userAnswer === answer) \{\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 alert(`Correct: $\{answer\}`);\
+\'a0 \'a0 \'a0 \'a0 \} else \{\
+\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 alert(`Incorrect: $\{answer\}`);\
+\'a0 \'a0 \'a0 \'a0 \}\
+\'a0 \'a0 \}\
+\}\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 document.addEventListener("DOMContentLoaded", () => \{\
+\'a0 \'a0 createCrossword();\
+\'a0 \'a0 document.querySelectorAll("input").forEach(input => \{\
+\'a0 \'a0 \'a0 \'a0 input.addEventListener("input", checkAnswers);\
+\'a0 \'a0 \});\
+\});}
